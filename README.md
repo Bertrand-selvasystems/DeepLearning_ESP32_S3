@@ -48,30 +48,14 @@ deep_learning_mine/
 
 L'entraînement est effectué sous Python avec TensorFlow et scikit-learn.
 
-### Installation des dépendances
-
-```sh
-pip install tensorflow pandas numpy scikit-learn
-```
-
-### Exécution de l'entraînement
-
-```sh
-cd model
-python train.py
-```
-
-Le modèle est ensuite sauvegardé sous `mon_modele.h5`.
+Vous trouverez le fichier ipynb dans le repertoire model : 
+entrainement_extraction_modele.ipynb
 
 ---
 
 ## 🔄 Conversion vers TensorFlow Lite
 
-Le modèle est converti en **TensorFlow Lite** avec le script `convert.py` :
-
-```sh
-python convert.py
-```
+Le modèle est converti en **TensorFlow Lite** à la suite de l'entrainement dans entrainement_extraction_modele.ipynb
 
 Cela génère le fichier `model.tflite` utilisé sur l'ESP32.
 
