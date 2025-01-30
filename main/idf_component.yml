@@ -1,0 +1,5 @@
+dependencies:
+  espressif/led_strip: "^2.5.5"
+  espressif/esp-tflite-micro:
+    version: '*'
+  espressif/esp-dsp: '*'

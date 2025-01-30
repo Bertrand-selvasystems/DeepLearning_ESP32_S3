@@ -1,0 +1,71 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// DECLARATION DES BIBLIOTHEQUES
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+#include "led.h"
+#include "esp_log.h"
+#include "led_strip.h"
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// DECLARATION DES VARIABLES STATIQUE
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// Variables pour la bande LED
+static led_strip_handle_t led_strip;
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// DEFINITION DES FONCTIONS
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+esp_err_t led_init(void)
+{
+    ESP_LOGI("LED", "Initialisation de la bande LED...");
+
+    // Configuration de la bande LED
+    led_strip_config_t strip_config = {
+        .strip_gpio_num = LED_STRIP_GPIO,         // GPIO de la bande LED
+        .max_leds = NUM_LEDS,                     // Nombre maximal de LEDs
+        .led_pixel_format = LED_PIXEL_FORMAT_GRB, // Format des pixels GRB
+        .led_model = LED_MODEL_WS2812,            // Modèle de bande LED (WS2812)
+        .flags = {
+            // Initialisation du champ 'flags'
+            .invert_out = false // Pas d'inversion du signal de sortie
+        }};
+
+    // Configuration du canal RMT
+    led_strip_rmt_config_t rmt_config = {
+        .clk_src = RMT_CLK_SRC_DEFAULT,    // Source d'horloge par défaut
+        .resolution_hz = 10 * 1000 * 1000, // Résolution de 10 MHz
+        .flags = {
+            .with_dma = false // Pas de DMA
+        }};
+
+    // Créer le périphérique RMT pour contrôler la bande LED
+    ESP_ERROR_CHECK(led_strip_new_rmt_device(&strip_config, &rmt_config, &led_strip));
+
+    return ESP_OK;
+}
+
+esp_err_t led_set_color(uint32_t index, uint8_t r, uint8_t g, uint8_t b)
+{
+    // Définir la couleur RGB pour une LED spécifique
+    ESP_ERROR_CHECK(led_strip_set_pixel(led_strip, index, r, g, b));
+    return ESP_OK;
+}
+
+esp_err_t led_refresh(void)
+{
+    // Rafraîchir la bande LED pour appliquer les changements
+    ESP_ERROR_CHECK(led_strip_refresh(led_strip));
+    return ESP_OK;
+}
+
+esp_err_t led_clear(void)
+{
+    // Effacer toutes les LEDs
+    ESP_ERROR_CHECK(led_strip_clear(led_strip));
+    return led_refresh(); // Rafraîchir pour que les LEDs soient mises à jour
+}

@@ -1,0 +1,45 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "ESP32-S3 Debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "H:/PROJETS/KWS_LUMIERE/PROGRAMME/ESPRESSIF-180924/hello_world10/build/your-project-name.elf",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:\\Users\\Bertrand\\.espressif\\tools\\xtensa-esp-elf-gdb\\14.2_20240403\\xtensa-esp-elf-gdb\\bin\\xtensa-esp32s3-elf-gdb.exe",
+            "setupCommands": [
+                {
+                    "text": "target remote :3333"
+                },
+                {
+                    "text": "mon reset halt"
+                },
+                {
+                    "text": "flushregs"
+                },
+                {
+                    "text": "thb app_main"
+                }
+            ],
+            "preLaunchTask": "idf.py -p COM5 build",
+            "miDebuggerServerAddress": "localhost:3333",
+            "debugServerPath": "C:\\Users\\Bertrand\\.espressif\\tools\\openocd-esp32\\v0.12.0-esp32-20240318\\openocd-esp32\\bin\\openocd.exe",
+            "debugServerArgs": "-s C:\\Users\\Bertrand\\.espressif\\tools\\openocd-esp32\\v0.12.0-esp32-20240318\\openocd-esp32\\share\\openocd\\scripts -f interface/ftdi/esp32_devkitj_v1.cfg -f target/esp32s3.cfg",
+            "serverStarted": "Info : Listening on port 3333 for gdb connections",
+            "launchCompleteCommand": "exec-continue",
+            "filterStderr": true,
+            "filterStdout": false,
+            "logging": {
+                "engineLogging": false,
+                "trace": true,
+                "traceResponse": true
+            }
+        }
+    ]
+}

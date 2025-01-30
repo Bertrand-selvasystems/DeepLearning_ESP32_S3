@@ -1,0 +1,36 @@
+{
+    "idf.adapterTargetName": "esp32s3",
+    "idf.flashType": "UART",
+    "idf.portWin": "COM11",
+    "idf.openOcdConfigs": [
+        "interface/ftdi/esp32_devkitj_v1.cfg",
+        "target/esp32s3.cfg"
+    ],
+    "files.associations": {
+        "led.h": "c",
+        "schema_generated.h": "c",
+        "micro_mutable_op_resolver.h": "c",
+        "micro.h": "c",
+        "ostream": "cpp",
+        "xlocmes": "cpp",
+        "cmath": "cpp",
+        "cstring": "cpp",
+        "variables.h": "c",
+        "array": "cpp",
+        "deque": "cpp",
+        "format": "cpp",
+        "initializer_list": "cpp",
+        "list": "cpp",
+        "ranges": "cpp",
+        "span": "cpp",
+        "stack": "cpp",
+        "utility": "cpp",
+        "vector": "cpp",
+        "xhash": "cpp",
+        "xstring": "cpp",
+        "xtree": "cpp",
+        "xutility": "cpp",
+        "algorithm": "cpp",
+        "xlocale": "cpp"
+    }
+}
